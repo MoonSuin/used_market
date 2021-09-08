@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>브로콜리 마켓</title>
+    <script>
+        function zzim(){
+            location.href='/board/like/{{b.num}}'
+        }
+    </script>
+</head>
+<body>
+<form>
+  <div>
+      <input type="text" name="title" value="{{b.title}}">
+  </div>
+  <div>
+          조회수: {{b.cnt}}    /   관심: {{b.like}}
+  </div>
+  <span>
+      작성자: <input type="text" name="writer" value="{{b.writer}}">
+  </span>
+  <span>
+      작성일: <input type="text" name="w_date" value="{{b.w_date}}">
+  </span>
+  {%if b.img1 != None%}
+  <div>
+      <img src="{{b.img1}}">
+  </div>
+  {% endif %}
+
+  {%if b.img2 != None%}
+  <div>
+      {{b.img2}}
+      <img src="{{b.img2}}" >
+  </div>
+  {% endif %}
+
+  {%if b.img3 != None%}
+  <div>
+      <img src="{{b.img3}}">
+  </div>
+  {% endif %}
+
+  <span>
+      가격: <input type="number" name="price" value="{{b.price}}">
+  </span>
+  <span>
+      지역: <input type="text" name="loc" value="{{b.loc}}">
+  </span>
+  <span>
+      품목: <input type="text" value="{{cate.name}}">
+  </span>
+  <div>
+      <input type="button" value="찜" onclick=zzim()>
+      <input type="button" value="구매의사전달">
+  </div>
+  <div>
+      <textarea name="content" rows="15" cols="45" value="{{b.content}}"></textarea>
+  </div>
+  {% if b.writer == session['login_id']%}
+    <input type="submit" value="수정">
+    <input type="button" value="삭제">
+  {% endif %}
+
+
+</form>
+</body>
+</html>

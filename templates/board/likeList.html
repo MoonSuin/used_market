@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>내 관심 목록</h3>
+<table>
+    <th>번호</th><th>관심글번호</th>
+    {% for b in llist %}
+        <tr>
+            <td>{{b.num}}</td>
+            <td><a href="/board/detail/{{b.b_num}}">{{b.b_num}}</a></td>
+        </tr>
+    {%endfor%}
+</table>
+</body>
+</html>

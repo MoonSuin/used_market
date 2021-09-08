@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>브로콜리 마켓</h3>
+<a href="/board/add">글작성</a>
+
+<table border="1">
+    {% for b in blist %}
+    {% if loop.index % 4 == 1 %}
+    <tr>
+    {% endif %}
+        <td>
+            <table>
+                <tr>
+                    <td><a href="/board/detail/{{b.num}}">
+                        {%if b.img1 != None%}
+                        <img src="{{b.img1}}" style="width: 200px, height:200px">
+                        {%elif b.img2 != None%}
+                        <img src="{{b.img2}}" style="width: 200px, height:200px">
+                        {%elif b.img3 != None%}
+                        <img src="{{b.img3}}" style="width: 200px, height:200px" >
+                        {%else%}
+                        <img src="/static/img/blank.jpg" style="width: 200px, height:200px" >
+                        {% endif %}
+                    </a></td>
+
+                </tr>
+                <tr>
+                    <td>{{b.title}}</td>
+                </tr>
+                <tr>
+                    <td>{{b.price}}</td>
+                </tr>
+                <tr>
+                    <td>{{b.loc}}</td>
+                </tr>
+            </table>
+        </td>
+    {% if loop.index % 4 == 0 %}
+    </tr>
+    {% endif %}
+    {% endfor %}
+</table>
+</body>
+</html>
