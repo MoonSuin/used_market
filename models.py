@@ -24,7 +24,7 @@ class Board(db.Model):
     price = db.Column(db.Integer, nullable=False)
     title = db.Column(db.String(50), nullable=False)
     content = db.Column(db.String(200), nullable=False)
-    img1 = db.Column(db.String(100), nullable=False)
+    img1 = db.Column(db.String(100))
     img2 = db.Column(db.String(100))
     img3 = db.Column(db.String(100))
     cnt = db.Column(db.Integer, nullable=False, default=0)

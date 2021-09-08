@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>브로콜리 마켓</h3>
+{% if session.flag == False %}
+    <a href="/member/join">회원가입</a>
+    <a href="/member/login">로그인</a>
+{% else %}
+    <a href="/member/myInfo">내정보</a>
+    <a href="/member/logout">로그아웃</a>
+    <a href="/member/out">탈퇴</a>
+    <a href="/board/like-list">관심</a>
+{% endif %}
+<a href="/board/list">브로콜리 마켓글</a>
+</body>
+</html>

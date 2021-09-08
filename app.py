@@ -1,5 +1,7 @@
 from flask import Flask, request, render_template, redirect, session
 from models import db, migrate  #모델 파일에 만든 객체 불러옴
+import routes.mem_route as mr
+import routes.board_route as br
 
 from datetime import datetime
 import config
@@ -14,7 +16,8 @@ app.secret_key = 'asdf'
 app.config.from_object(config)
 
 #blueprint등록
-#app.register_blueprint(mr.bp)
+app.register_blueprint(mr.bp)
+app.register_blueprint(br.bp)
 
 
 # ORM을 위한 설정

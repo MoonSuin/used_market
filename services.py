@@ -42,25 +42,39 @@ class BoardService:
     def cateList(self):
         return Prod_cate.query.order_by(Prod_cate.num.asc())
 
+    def getCate(self, cnum):
+        return Prod_cate.query.get(cnum)
+
     def addBoard(self, b):  # b: writer, w_date, loc, p_cate_num, price, title, content, img
         db.session.add(b)
         db.session.commit()
-        return b.num
+        return b
+
+    def editImgs(self, b):
+        bb = self.getByNum(b.num)
+        bb.img1 = b.img1
+        bb.img2 = b.img2
+        bb.img3 = b.img3
+        db.session.commit()
 
     def getByNum(self, num):
+
         return Board.query.get(num)
 
     def getByTitle(self, title):
         return Board.query.filter(Board.title.like('%'+title+'%')).all()
 
     def getByCate(self, cate_num):
-        return Board.query.filter(Board.p_cate_num(cate_num)).all()
+        return Board.query.filter(Board.p_cate_num==cate_num).all()
 
     def getByLoc(self, loc):
         return Board.query.filter(Board.loc(loc)).all()
 
     def getAll(self):
         return Board.query.order_by(Board.num.desc())
+
+    def getByWriter(self, writer):
+        return Board.query.filter(Board.writer==writer).order_by(Board.num.asc())
 
     def editBoard(self, b): #제목,가격,내용,사진
         bb = Board.query.get(b.num)
@@ -90,6 +104,15 @@ class BoardService:
             b.state = False
         else:
             b.state = True
+
+    def myLikeAdd(self, b_num):
+        id = session['login_id']
+        db.session.add(Prod_like(id=id, b_num=b_num))
+        db.session.commit()
+
+    def myLikeList(self):
+        id = session['login_id']
+        return Prod_like.query.filter(Prod_like.id == id).order_by(Prod_like.num.desc())
 
 
 
