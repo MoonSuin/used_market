@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MEMBER</title>
+    <script>
+        function del(){
+            flag = confirm('삭제하시겠습니까?')
+            if(flag){
+                location.href='/member/out'
+            } else {
+                alert('삭제가 취소되었습니다.')
+            }
+
+        }
+    </script>
+</head>
+<body>
+<h3>{{m.id}}님의 회원정보</h3>
+<form action="/member/edit" method="post">
+    <table>
+        <tr><td>아이디</td><td>{{m.id}}</td></tr>
+        <tr><td>비밀번호</td><td><input type="password" name="pwd" value="{{m.pwd}}"></td></tr>
+        <tr><td>전화번호</td><td><input type="tel" name="tel" value="{{m.tel}}"></td></tr>
+        <tr><td>이메일</td><td><input type="email" name="email" value="{{m.email}}"></td></tr>
+        <tr><td>가입일</td><td>{{m.create_date}}</td></tr>
+        {% if m.id == session.login_id %}
+        <tr><td colspan="2">
+            <input type="submit" value="수정">
+            <input type="button" value="삭제" onclick="del()">
+        </td></tr>
+        {% endif %}
+    </table>
+</form>
+</body>
+</html>
