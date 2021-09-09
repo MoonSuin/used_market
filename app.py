@@ -30,7 +30,7 @@ migrate.init_app(app, db)
 def root():
     if 'flag' not in session.keys():
         session['flag'] = False
-    return render_template('index.html')
+    return redirect('/board/list')
 
 @app.route('/bootstrap')
 def bootstrap():

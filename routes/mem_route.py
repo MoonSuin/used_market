@@ -33,7 +33,7 @@ def login():
     id = request.form['id']
     pwd = request.form['pwd']
     service.login(id, pwd)
-    return render_template('index.html')
+    return redirect('/')
 
 
 @bp.route('/myInfo')

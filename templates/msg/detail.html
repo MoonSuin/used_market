@@ -1,26 +1,240 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <script>
-        function a(){
-            location.href='/board/change-state/{{msg.b_num}}'
-        }
-    </script>
-</head>
-<body>
-<h3>메세지 상세 페이지</h3>
-<a href="/board/my-msg">목록으로 돌아가기</a>
-<input type="button" value="판매확정" onclick="a()">
-<table border="1">
-    <tr><th>num</th><td>{{msg.num}}</td></tr>
-    <tr><th>b_num</th><td>{{msg.b_num}}</td></tr>
-    <tr><th>like_id</th><td>{{msg.like_id}}</td></tr>
-    <tr><th>tel</th><td>{{msg.tel}}</td></tr>
-    <tr><th>content</th><td>{{msg.content}}</td></tr>
-        <tr><th>읽음상태</th><td>{{msg.checked}}</td>
-    </tr>
-</table>
-</body>
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Stuff Template</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="author" content="" />
+
+  <!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="../../static/css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="../../static/css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="../../static/css/bootstrap.css">
+
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="../../static/css/magnific-popup.css">
+
+	<!-- Flexslider  -->
+	<link rel="stylesheet" href="../../static/css/flexslider.css">
+
+	<!-- Owl Carousel -->
+	<link rel="stylesheet" href="../../static/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="../../static/css/owl.theme.default.min.css">
+
+	<!-- Flaticons  -->
+	<link rel="stylesheet" href="../../static/fonts/flaticon/font/flaticon.css">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="../../static/css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="../../static/js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="../../static/js/respond.min.js"></script>
+	<![endif]-->
+	<style>
+		strong {color: #F6490D;}
+		table {
+
+			}
+	</style>
+	</head>
+	<body>
+	<div class="colorlib-loader"></div>
+	<div id="page">
+		<nav class="colorlib-nav" role="navigation">
+			<div class="top-menu">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-2">
+							<div id="colorlib-logo"><a href="index.html">Stuff</a></div>
+						</div>
+						<div class="col-xs-10 text-right menu-1">
+							<ul>
+								<li><a href="/">Home</a></li>
+								<li class="has-dropdown active">
+									<a href="/board/add">Market</a>
+									<ul class="dropdown">
+										<li><a href="/board/list">List</a></li>
+										<li><a href="/board/add">Upload</a></li>
+									</ul>
+								</li>
+								{% if session.flag == False %}
+
+    								<li><a href="/member/join">회원가입</a></li>
+    								<li><a href="/member/login">로그인</a></li>
+							 	{% else %}
+								<li><a href="/member/myInfo">내정보</a></li>
+								<li><a href="/member/like-list">관심상품</a></li>
+								<li><a href="/board/my-msg">메세지</a></li>
+								<li class="active"><a href="/member/logout">로그아웃</a></li>
+								<li><a href="/member/out">탈퇴</a></li>
+								{% endif %}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<aside id="colorlib-breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 breadcrumbs text-center">
+						<h2>메세지 상세페이지</h2>
+						<p><span><a href="index.html">Home</a></span> / <span>Message Detail</span></p>
+					</div>
+				</div>
+			</div>
+		</aside>
+
+
+		<form style="margin : auto; width : 70%;">
+			<div class="row form-group">
+				<div class="col-md-12">
+					<label for="num"><strong>메세지 번호</strong></label>
+					<input type="text" id="num" class="form-control" value="{{msg.num}}" readonly>
+				</div>
+			</div>
+			<div class="row form-group">
+				<div class="col-md-12">
+					<label for="b.num"><strong>해당 게시판 번호</strong></label>
+					<input type="text" id="b.num" class="form-control" value="{{msg.b_num}}" readonly>
+				</div>
+			</div>
+			<div class="row form-group">
+				<div class="col-md-12">
+					<label for="like_id"><strong>메세지 발신자</strong></label>
+					<input type="text" id="like_id" class="form-control" value="{{msg.like_id}}" readonly>
+				</div>
+			</div>
+			<div class="row form-group">
+				<div class="col-md-12">
+					<label for="tel"><strong>발신자 연락처</strong></label>
+					<input type="text" id="tel" class="form-control" value="{{msg.tel}}" readonly>
+				</div>
+			</div>
+			<div class="row form-group">
+				<div class="col-md-12">
+					<label for="content"><strong>메세지</strong></label>
+					<input type="text" id="content" class="form-control" value="{{msg.content}}" readonly>
+				</div>
+			</div>
+			<div class="row form-group">
+				<div class="col-md-12">
+					<label for="checked"><strong>읽음 상태</strong></label>
+					<input type="text" id="checked" class="form-control" value="{{msg.checked}}" readonly>
+				</div>
+			</div>
+		</form>
+
+
+		<footer id="colorlib-footer" role="contentinfo">
+			<div class="container">
+				<div class="row row-pb-md">
+					<div class="col-md-3">
+						<h2>Navigational</h2>
+						<p>
+							<ul class="colorlib-footer-links">
+								<li><a href="#"><i class="icon-check"></i> Home</a></li>
+								<li><a href="#"><i class="icon-check"></i> About Me</a></li>
+								<li><a href="#"><i class="icon-check"></i> Blog</a></li>
+								<li><a href="#"><i class="icon-check"></i> Travel</a></li>
+								<li><a href="#"><i class="icon-check"></i> Lifestyle</a></li>
+								<li><a href="#"><i class="icon-check"></i> Fashion</a></li>
+								<li><a href="#"><i class="icon-check"></i> Health</a></li>
+							</ul>
+						</p>
+					</div>
+					<div class="col-md-3">
+						<h2>Recent Post</h2>
+						<div class="f-blog">
+							<a href="blog.html" class="blog-img" style="background-image: url(images/blog-1.jpg);">
+							</a>
+							<div class="desc">
+								<h3><a href="blog.html">Be a designer</a></h3>
+								<p class="admin"><span>25 March 2018</span></p>
+							</div>
+						</div>
+						<div class="f-blog">
+							<a href="blog.html" class="blog-img" style="background-image: url(images/blog-2.jpg);">
+							</a>
+							<div class="desc">
+								<h3><a href="blog.html">How to build website</a></h3>
+								<p class="admin"><span>24 March 2018</span></p>
+							</div>
+						</div>
+						<div class="f-blog">
+							<a href="blog.html" class="blog-img" style="background-image: url(images/blog-3.jpg);">
+							</a>
+							<div class="desc">
+								<h3><a href="blog.html">Create website</a></h3>
+								<p class="admin"><span>23 March 2018</span></p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<h2>Archive</h2>
+						<p>
+							<ul class="colorlib-footer-links">
+								<li><a href="#"><i class="icon-check"></i> February 2018</a></li>
+								<li><a href="#"><i class="icon-check"></i> January 2018</a></li>
+								<li><a href="#"><i class="icon-check"></i> December 2017</a></li>
+								<li><a href="#"><i class="icon-check"></i> November 2017</a></li>
+								<li><a href="#"><i class="icon-check"></i> October 2017</a></li>
+								<li><a href="#"><i class="icon-check"></i> September 2017</a></li>
+							</ul>
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<p>
+							<small class="block"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></small>
+							<small class="block">Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a></small>
+						</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+	</body>
+	<!-- jQuery -->
+	<script src="../../static/js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="../../static/js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="../../static/js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="../../static/js/jquery.waypoints.min.js"></script>
+	<!-- Flexslider -->
+	<script src="../../static/js/jquery.flexslider-min.js"></script>
+	<!-- Owl carousel -->
+	<script src="../../static/js/owl.carousel.min.js"></script>
+	<!-- Magnific Popup -->
+	<script src="../../static/js/jquery.magnific-popup.min.js"></script>
+	<script src="../../static/js/magnific-popup-options.js"></script>
+	<!-- Main -->
+	<script src="../../static/js/main.js"></script>
 </html>

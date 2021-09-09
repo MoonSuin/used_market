@@ -1,11 +1,8 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Stuff Template</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="" />
 	<meta name="keywords" content="" />
 	<meta name="author" content="" />
 
@@ -23,64 +20,84 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
 
 	<!-- Animate.css -->
-	<link rel="stylesheet" href="../static/css/animate.css">
+	<link rel="stylesheet" href="../../static/css/animate.css">
 	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="../static/css/icomoon.css">
+	<link rel="stylesheet" href="../../static/css/icomoon.css">
 	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="../static/css/bootstrap.css">
-
+	<link rel="stylesheet" href="../../static/css/bootstrap.css">
 	<!-- Magnific Popup -->
-	<link rel="stylesheet" href="../static/css/magnific-popup.css">
+	<link rel="stylesheet" href="../../static/css/magnific-popup.css">
 
 	<!-- Flexslider  -->
-	<link rel="stylesheet" href="../static/css/flexslider.css">
+	<link rel="stylesheet" href="../../static/css/flexslider.css">
 
 	<!-- Owl Carousel -->
-	<link rel="stylesheet" href="../static/css/owl.carousel.min.css">
-	<link rel="stylesheet" href="../static/css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="../../static/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="../../static/css/owl.theme.default.min.css">
 
 	<!-- Flaticons  -->
-	<link rel="stylesheet" href="../static/fonts/flaticon/font/flaticon.css">
+	<link rel="stylesheet" href="../../static/fonts/flaticon/font/flaticon.css">
 
 	<!-- Theme style  -->
-	<link rel="stylesheet" href="../static/css/style.css">
+	<link rel="stylesheet" href="../../static/css/style.css">
 
 	<!-- Modernizr JS -->
-	<script src="../static/js/modernizr-2.6.2.min.js"></script>
+	<script src="../../static/js/modernizr-2.6.2.min.js"></script>
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
-	<script src="../static/js/respond.min.js"></script>
+	<script src="../../static/js/respond.min.js"></script>
 	<![endif]-->
-
-	</head>
-	<body>
-
-	<div class="colorlib-loader"></div>
-
-	<div id="page">
-		<nav class="colorlib-nav" role="navigation">
+    <title>브로콜리 마켓</title>
+    <script>
+        function zzim(){
+            location.href='/board/like/{{b.num}}'
+        }
+        function edit(){
+            location.href='/board/edit/{{b.num}}'
+        }
+        function del(){
+            location.href='/board/del/{{b.num}}'
+        }
+        function a(){
+            flag = '{{b.state}}'
+            if(flag == 'True'){
+                alert('판매완료된 상품입니다')
+            }else{
+                f.style.display=''
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="colorlib-loader"></div>
+        <nav class="colorlib-nav" role="navigation">
 			<div class="top-menu">
 				<div class="container">
 					<div class="row">
 						<div class="col-xs-2">
-							<div id="colorlib-logo"><a href="index.html">Stuff</a></div>
+							<div id="colorlib-logo"><a href="../index.html">Stuff</a></div>
 						</div>
 						<div class="col-xs-10 text-right menu-1">
 							<ul>
-								<li><a href="index.html">Home</a></li>
-								<li class="has-dropdown">
-									<a href="blog.html">Blog</a>
+								<li><a href="/">Home</a></li>
+								<li class="has-dropdown active">
+									<a href="/board/add">Market</a>
 									<ul class="dropdown">
-										<li><a href="single.html">Blog Single</a></li>
-										<li><a href="#">Video</a></li>
-										<li><a href="#">Read</a></li>
-										<li><a href="#">Lifestyle</a></li>
+										<li><a href="/board/list">List</a></li>
+										<li><a href="/board/add">Upload</a></li>
 									</ul>
 								</li>
-								<li><a href="event.html">Event</a></li>
-								<li><a href="travel.html">Travel</a></li>
-								<li class="active"><a href="about.html">About Me</a></li>
-								<li><a href="contact.html">Contact</a></li>
+								{% if session.flag == False %}
+
+    								<li><a href="/member/join">회원가입</a></li>
+    								<li><a href="/member/login">로그인</a></li>
+							 	{% else %}
+								<li><a href="/member/myInfo">내정보</a></li>
+								<li><a href="/board/like-list">관심상품</a></li>
+								<li><a href="/board/my-msg">메세지</a></li>
+								<li class="active"><a href="/member/logout">로그아웃</a></li>
+								<li><a href="/member/out">탈퇴</a></li>
+								{% endif %}
 							</ul>
 						</div>
 					</div>
@@ -92,65 +109,102 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12 breadcrumbs text-center">
-						<h2>받은 메세지</h2>
-						<p><span><a href="index.html">Home</a></span> / <span>Message</span></p>
+						<h3>상품 상세페이지</h3>
+						<p><span><a href="index.html">Home</a></span> / <span>Product</span></p>
 					</div>
 				</div>
 			</div>
 		</aside>
+{% if b.state %}
+<h3>판매완료</h3>
+{%endif%}
 
-		<div id="colorlib-container">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6">
-						<img class="img-responsive" src="images/author.jpg" alt="">
-					</div>
-					<div class="col-md-6">
-						<p>Hi! My Name is <strong>Rich</strong> Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
-						<blockquote>
-							A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.
-						</blockquote>
-						<p class="first-letra">Far far away, <strong><a href="#">behind the word mountains</a></strong>, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-						<p>
-							<ul class="colorlib-social-icons">
-								<li><a href="#"><i class="icon-twitter"></i></a></li>
-								<li><a href="#"><i class="icon-facebook"></i></a></li>
-								<li><a href="#"><i class="icon-linkedin"></i></a></li>
-								<li><a href="#"><i class="icon-dribbble"></i></a></li>
-							</ul>
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
+<div class="container-fluid">
+        <div class="col-6 box1">
+            {%if b.img1 != None%}
+              <img class="prod_img" src="{{b.img1}}">
+            {% endif %}
+            {%if b.img2 != None%}
+              <img class="prod_img" src="{{b.img2}}" >
+            {% endif %}
+            {%if b.img3 != None%}
+              <img class="prod_img" src="{{b.img3}}">
+            {% endif %}
+        </div>
+        <div class="col-6 box2">
+            <div class="detail-Product-Title">
+                <label class="product-title" for="title">제목</label>
+                <p>
+                <input type="text" name="title" value="{{b.title}}" />
+                </p>
+            </div>
+            <div class="">
+                    <label>조회수: {{b.cnt}}</label>
+                    <br/>
+                    <label>관심: {{b.like}}</label>
+            </div>
+            <div class="">
+                <label for="writer">작성자: </label>
+                <p>
+                    <input type="text" name="writer" value="{{b.writer}}" readonly/>
+                </p>
+                <label> 작성일: </label>
+                <p>  {{b.w_date}} </p>
 
-		<div id="colorlib-instagram">
-			<div class="row">
-				<div class="col-md-12 col-md-offset-0 colorlib-heading text-center">
-					<h2>Instagram</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="instagram-entry">
-					<a href="#" class="instagram text-center" style="background-image: url(images/gallery-1.jpg);">
-					</a>
-					<a href="#" class="instagram text-center" style="background-image: url(images/gallery-2.jpg);">
-					</a>
-					<a href="#" class="instagram text-center" style="background-image: url(images/gallery-3.jpg);">
-					</a>
-					<a href="#" class="instagram text-center" style="background-image: url(images/gallery-4.jpg);">
-					</a>
-					<a href="#" class="instagram text-center" style="background-image: url(images/gallery-5.jpg);">
-					</a>
-					<a href="#" class="instagram text-center" style="background-image: url(images/gallery-6.jpg);">
-					</a>
-					<a href="#" class="instagram text-center" style="background-image: url(images/gallery-7.jpg);">
-					</a>
-					<a href="#" class="instagram text-center" style="background-image: url(images/gallery-8.jpg);">
-					</a>
-				</div>
-			</div>
-		</div>
+            </div>
+            <div class="">
+                <label for="price">가격: </label>
+                <p>
+                    <input type="text" name="price" value="{{b.price}}" />
+                </p>
+            </div>
+            <div class="">
+                <label for="loc">지역: </label>
+                <p>
+                    <input type="text" name="loc" value="{{b.loc}}" />
+                </p>
+            </div>
+            <div class="">
+                <label for="cate">품목: </label>
+                <p>
+                     <input type="text" value="{{cate.name}}" />
+                </p>
+            </div>
+            <div class="detail-Btns">
+                <span id="likeBtn" onclick="zzim()">찜 <span id="likeHeart">&#9829;</span></span>
+                <span id="sendDmBtn" onclick="a()">판매자에게 DM</span>
+            </div>
+            <div class="">
+                {% if b.writer == session['login_id']%}
+                <button class="" onclick="edit()"> 수정 </button>
+                <button class="" onclick="del()"> 삭제 </button>
+                {% endif %}
+            </div>
+            <div>
+                <label for="content">내용: </label>
+                <textarea class="content">{{b.content}}</textarea>
+            </div>
+            <div class="box2-Semi">
+                <form action="/msg/add" method="post" name="f" style="display:none">
+                    <input type="hidden" name="b_num" value="{{b.num}}">
+                    <label for="like_id">: </label>
+                    <p>
+                    <input type="text" name="like_id" value="{{session.login_id}}" readonly>
+                    </p>
+                    <label for="tel">연락처: </label>
+                    <p>
+                    <input type="tel" name="tel" value="{{tel}}">
+                    </p>
+                    <label for="content">메시지: </label>
+                    <p>
+                    <input type="text" name="content">
+                    </p>
+                    <input class="" type="submit" value="전송">
+                </form>
+            </div>
+        </div>
+
+</div>
 		<footer id="colorlib-footer" role="contentinfo">
 			<div class="container">
 				<div class="row row-pb-md">
@@ -251,23 +305,76 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		<a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
 	</div>
 
+</body>
 	<!-- jQuery -->
-	<script src="../static/js/jquery.min.js"></script>
+	<script src="../../static/js/jquery.min.js"></script>
 	<!-- jQuery Easing -->
-	<script src="../static/js/jquery.easing.1.3.js"></script>
+	<script src="../../static/js/jquery.easing.1.3.js"></script>
 	<!-- Bootstrap -->
-	<script src="../static/js/bootstrap.min.js"></script>
+	<script src="../../static/js/bootstrap.min.js"></script>
 	<!-- Waypoints -->
-	<script src="../static/js/jquery.waypoints.min.js"></script>
+	<script src="../../static/js/jquery.waypoints.min.js"></script>
 	<!-- Flexslider -->
-	<script src="../static/js/jquery.flexslider-min.js"></script>
+	<script src="../../static/js/jquery.flexslider-min.js"></script>
 	<!-- Owl carousel -->
-	<script src="../static/js/owl.carousel.min.js"></script>
+	<script src="../../static/js/owl.carousel.min.js"></script>
 	<!-- Magnific Popup -->
-	<script src="../static/js/jquery.magnific-popup.min.js"></script>
-	<script src="../static/js/magnific-popup-options.js"></script>
+	<script src="../../static/js/jquery.magnific-popup.min.js"></script>
+	<script src="../../static/js/magnific-popup-options.js"></script>
+	<!-- Google Map -->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA&sensor=false"></script>
+	<script src="../../static/js/google_map.js"></script>
 	<!-- Main -->
-	<script src="../static/js/main.js"></script>
+	<script src="../../static/js/main.js"></script>
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>-->
+<style>
+.box1 {
+    float: left;
+    width: 50%;
+    height: 50%;
+}
+.box2 {
+    display: inline-block;
+    width: 50%;
+    height: 50%;
+    padding-left: 30px;
+}
 
-	</body>
+.box2 input[type="text"] {
+    height: 40px;
+    width: 250px;
+}
+.box2 input[type="text"]:focus {
+    text-shadow: none;
+    text-transform: none;
+    transition-delay: 0s, 0s, 0s;
+    transition-duration: 0.15s, 0.15s, 0.15s;
+    transition-property: border-color, box-shadow, -webkit-box-shadow;
+}
+.prod_img {
+    width: 100%;
+    height: 100%;
+}
+.right-Sector {
+    padding-top: 100px;
+    padding-left: 30px;
+}
+.detail-Product-Title {
+
+}
+.product-title {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 1.22857;
+    color: #333333;
+}
+
+.detail-Btns > p:hover{
+    cursor: pointer;
+}
+#likeHeart {
+    color: rgba(255, 100, 10);
+}
+</style>
+
 </html>

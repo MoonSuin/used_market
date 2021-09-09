@@ -52,6 +52,56 @@
 	<!--[if lt IE 9]>
 	<script src="../static/js/respond.min.js"></script>
 	<![endif]-->
+    <script type="text/javascript">
+        function searchBoxChange(e) {
+            var locList = ["전체", "서울", "경기", "부산", "대전", "강원"];
+            var cateList = ["전체", "가전", "가구", "PC/모바일", "의류", "기타"];
+            var dynamic = document.getElementById("dynamic");
+
+            while (dynamic.hasChildNodes()) {
+                dynamic.removeChild(dynamic.firstChild);
+            }
+
+            document.getElementById("btnSubmit").disabled = false;
+
+            if(e.value == "title") {
+                var titleTextBox = document.createElement("input");
+                titleTextBox.setAttribute("type", "text");
+                titleTextBox.setAttribute("id", "keyword");
+                titleTextBox.setAttribute("name", "keyword");
+
+                document.getElementById("dynamic").appendChild(titleTextBox);
+
+            } else if(e.value == "loc") {
+                var locSelectBox = document.createElement("select");
+                locSelectBox.setAttribute("id", "locKeyword");
+                locSelectBox.setAttribute("name", "locKeyword");
+
+                for (var i = 0 ; i < locList.length ; i++) {
+                    var option = document.createElement("option");
+                    option.value = locList[i];
+                    option.text = locList[i];
+
+                    locSelectBox.appendChild(option);
+                }
+
+                document.getElementById("dynamic").appendChild(locSelectBox);
+            } else if (e.value == "cate") {
+                var cateSelectBox = document.createElement("select");
+                cateSelectBox.setAttribute("id", "cateKeyword");
+                cateSelectBox.setAttribute("name", "cateKeyword");
+
+                for (var i = 0 ; i < cateList.length ; i++) {
+                    var option = document.createElement("option");
+                    option.value = i + 1;
+                    option.text = cateList[i];
+                    cateSelectBox.appendChild(option);
+                }
+
+                document.getElementById("dynamic").appendChild(cateSelectBox);
+            }
+        }
+    </script>
 
 	</head>
 	<body>
@@ -68,20 +118,25 @@
 						</div>
 						<div class="col-xs-10 text-right menu-1">
 							<ul>
-								<li><a href="index.html">Home</a></li>
+								<li><a href="/">Home</a></li>
 								<li class="has-dropdown active">
 									<a href="/board/add">Market</a>
 									<ul class="dropdown">
-										<li><a href="single.html">List</a></li>
+										<li><a href="/board/list">List</a></li>
 										<li><a href="/board/add">Upload</a></li>
-										<li><a href="#">Read</a></li>
-										<li><a href="#">Lifestyle</a></li>
 									</ul>
 								</li>
-								<li><a href="event.html">Event</a></li>
-								<li><a href="travel.html">Travel</a></li>
-								<li><a href="about.html">About Me</a></li>
-								<li><a href="contact.html">Contact</a></li>
+								{% if session.flag == False %}
+
+    								<li><a href="/member/join">회원가입</a></li>
+    								<li><a href="/member/login">로그인</a></li>
+							 	{% else %}
+								<li><a href="/member/myInfo">내정보</a></li>
+								<li><a href="/board/like-list">관심상품</a></li>
+								<li><a href="/board/my-msg">메세지</a></li>
+								<li class="active"><a href="/member/logout">로그아웃</a></li>
+								<li><a href="/member/out">탈퇴</a></li>
+								{% endif %}
 							</ul>
 						</div>
 					</div>
@@ -93,7 +148,16 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12 breadcrumbs text-center">
-						<h2>여기 검색창</h2>
+						<form action="/board/search" method="post">
+							<select name="field" onchange="searchBoxChange(this)" style="margin-right:10px;">
+								<option value="none" selected disabled hidden>==검색 조건==</option>
+								<option value="title">제목</option>
+								<option value="loc">지역</option>
+								<option value="cate">품목</option>
+							</select>
+							<span id = "dynamic"></span>
+							<input type="submit" value="검색" id="btnSubmit" disabled="True" style="margin-left:10px;">
+						</form>
 						<p><span><a href="index.html">Home</a></span> / <span>Blog</span></p>
 					</div>
 				</div>
