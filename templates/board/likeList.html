@@ -12,6 +12,13 @@
         <tr>
             <td>{{b.num}}</td>
             <td><a href="/board/detail/{{b.b_num}}">{{b.b_num}}</a></td>
+            {%for a in blist%}
+                {% if a.num == b.b_num %}
+                    <td>{{a.title}}</td>
+
+                {% endif %}
+            {% endfor %}
+            <td>{{b.id}}</td>
         </tr>
     {%endfor%}
 </table>

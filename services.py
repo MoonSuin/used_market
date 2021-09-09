@@ -58,14 +58,13 @@ class BoardService:
         db.session.commit()
 
     def getByNum(self, num):
-
         return Board.query.get(num)
 
     def getByTitle(self, title):
         return Board.query.filter(Board.title.like('%'+title+'%')).all()
 
-    def getByCate(self, cate_num):
-        return Board.query.filter(Board.p_cate_num==cate_num).all()
+    def getByCate(self, cate):
+        return Board.query.filter(Prod_cate.name == cate).all()
 
     def getByLoc(self, loc):
         return Board.query.filter(Board.loc(loc)).all()
@@ -89,7 +88,7 @@ class BoardService:
         db.session.commit()
 
     def editCnt(self, num):
-        b = self.getByNum(num)
+        b = Board.query.get(num)
         b.cnt += 1
         db.session.commit()
 
@@ -100,10 +99,13 @@ class BoardService:
 
     def editState(self, num):
         b = self.getByNum(num)
+        old = b.title
         if b.state:
             b.state = False
         else:
             b.state = True
+            b.title = '[판매완료]'+old
+        db.session.commit()
 
     def myLikeAdd(self, b_num):
         id = session['login_id']
@@ -114,6 +116,20 @@ class BoardService:
         id = session['login_id']
         return Prod_like.query.filter(Prod_like.id == id).order_by(Prod_like.num.desc())
 
+class MsgService:
+    def addMsg(self, m):
+        db.session.add(m)
+        db.session.commit()
+
+    def getByBNum(self, b_num):
+        Msg.query.filter(Msg.b_num == b_num).order_by(Msg.num.desc())
+
+    def getByNum(self, num):
+        m = Msg.query.get(num)
+        if not m.checked:
+            m.checked = True
+        db.session.commit()
+        return m
 
 
 

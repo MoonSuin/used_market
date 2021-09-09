@@ -46,6 +46,9 @@ class Prod_like(db.Model):
 class Msg(db.Model):
     num = db.Column(db.Integer, primary_key=True)
     b_num = db.Column(db.Integer, db.ForeignKey('board.num', ondelete='CASCADE'))
+    board = db.relationship('Board', backref=db.backref('msg_set'))
+    like_id = db.Column(db.String(20), db.ForeignKey('member.id', ondelete='CASCADE'))
+    tel = db.Column(db.String(20), nullable=False)
     content = db.Column(db.String(100))
     checked = db.Column(db.Boolean, default=False)
 

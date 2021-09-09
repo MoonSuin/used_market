@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table border="1">
+  <tr><td>writer</td><td><input type="text" name="writer" value="{{session.login_id}}" readonly></td></tr>
+  <tr><td>판매지역</td><td name="loc">{{b.loc}}</td></tr>
+  <tr><td>상품분류</td><td>
+      <select name="p_cate_num">
+          {% for i in cate: %}
+            <option value="{{i.num}}">{{i.name}}</option>
+          {%endfor%}
+      </select>
+  </td></tr>
+  <tr><td>가격</td><td><input type="number" name="price" ></td></tr>
+  <tr><td>제목</td><td><input type="text" name="title" ></td></tr>
+    <tr><td>내용 </td><td><textarea rows="15" cols="45" name="content"></textarea></td></tr>
+  <tr><td>img1</td><td><input type="file" name="img1"></td></tr>
+  <tr><td>img2</td><td><input type="file" name="img2"></td></tr>
+  <tr><td>img3</td><td><input type="file" name="img3"></td></tr>
+  <tr><td colspan="2"><input type="submit" value="수정"></td></tr>
+</body>
+</html>
