@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>메세지 목록</h3>
+{% for mlist in msglist %}
+    <h3>{{mlist[0].b_num}} 판매글의 메세지</h3>
+    <ul>
+        {% for msg in mlist%}
+            <li>
+                <a href="/msg/get/{{msg.num}}">{{msg.num}}</a>
+                / {{msg.like_id}} /
+                {% if msg.checked %}
+                    읽음
+                {% else %}
+                    읽지않음
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endfor %}
+</body>
+</html>

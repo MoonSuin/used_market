@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function a(){
+            location.href='/board/change-state/{{msg.b_num}}'
+        }
+    </script>
+</head>
+<body>
+<h3>메세지 상세 페이지</h3>
+<a href="/board/my-msg">목록으로 돌아가기</a>
+<input type="button" value="판매확정" onclick="a()">
+<table border="1">
+    <tr><th>num</th><td>{{msg.num}}</td></tr>
+    <tr><th>b_num</th><td>{{msg.b_num}}</td></tr>
+    <tr><th>like_id</th><td>{{msg.like_id}}</td></tr>
+    <tr><th>tel</th><td>{{msg.tel}}</td></tr>
+    <tr><th>content</th><td>{{msg.content}}</td></tr>
+        <tr><th>읽음상태</th><td>{{msg.checked}}</td>
+    </tr>
+</table>
+</body>
+</html>
