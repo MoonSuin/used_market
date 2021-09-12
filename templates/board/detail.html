@@ -128,11 +128,23 @@
 						<img class="img-responsive" src="images/author.jpg" alt="">
 					</div>
 					<div class="col-md-6">
-						<p>Hi! My Name is <strong>Rich</strong> Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+						<div>
+							가격: <input type="number" name="price" value="{{b.price}}">
+						</div>
+						<div>
+							지역: <input type="text" name="loc" value="{{b.loc}}">
+						</div>
+						<div>
+							품목: <input type="text" value="{{cate.name}}">
+						</div>
 						<blockquote>
-							A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.
+							<input type="button" class="form-control" value="찜" onclick=zzim()>
+      						<input type="button" class="form-control" value="구매의사전달" onclick="a()">
 						</blockquote>
 						<p class="first-letra">Far far away, <strong><a href="#">behind the word mountains</a></strong>, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+						<p class="first-letra" name="content">
+							{{b.content}}
+						</p>
 						<p>
 							<ul class="colorlib-social-icons">
 								<li><a href="#"><i class="icon-twitter"></i></a></li>
