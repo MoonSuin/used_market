@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>브로콜리 마켓</title>
+    <script>
+        function zzim(){
+            location.href='/board/like/{{b.num}}'
+        }
+        function edit(){
+            location.href='/board/edit/{{b.num}}'
+        }
+        function del(){
+            location.href='/board/del/{{b.num}}'
+        }
+        function a(){
+            flag = '{{b.state}}'
+            if(flag == 'True'){
+                alert('판매완료된 상품입니다')
+            }else{
+                f.style.display=''
+            }
+        }
+    </script>
+</head>
+<body>
+{% if b.state %}
+<h3>판매완료</h3>
+{%endif%}
+<form >
+  <div>
+      <input type="text" name="title" value="{{b.title}}">
+  </div>
+  <div>
+          조회수: {{b.cnt}}    /   관심: {{b.like}}
+  </div>
+  <span>
+      작성자: <input type="text" name="writer" value="{{b.writer}}">
+  </span>
+  <span>
+      작성일: <input type="text" name="w_date" value="{{b.w_date}}">
+  </span>
+  {%if b.img1 != None%}
+  <div>
+      <img src="{{b.img1}}">
+  </div>
+  {% endif %}
+
+  {%if b.img2 != None%}
+  <div>
+      <img src="{{b.img2}}" >
+  </div>
+  {% endif %}
+
+  {%if b.img3 != None%}
+  <div>
+      <img src="{{b.img3}}">
+  </div>
+  {% endif %}
+
+  <span>
+      가격: <input type="number" name="price" value="{{b.price}}">
+  </span>
+  <span>
+      지역: <input type="text" name="loc" value="{{b.loc}}">
+  </span>
+  <span>
+      품목: <input type="text" value="{{cate.name}}">
+  </span>
+  <div>
+      <input type="button" value="찜" onclick=zzim()>
+      <input type="button" value="구매의사전달" onclick="a()">
+  </div>
+  <div>
+      <textarea name="content" rows="15" cols="45" >{{b.content}}</textarea>
+  </div>
+  {% if b.writer == session['login_id']%}
+    <input type="button" value="수정" onclick="edit()">
+    <input type="button" value="삭제" onclick="del()">
+  {% endif %}
+</form>
+<form action="/msg/add" method="post" name="f" style="display:None">
+    <input type="hidden" name="b_num" value="{{b.num}}">
+    구매자: <input type="text" name="like_id" value="{{session.login_id}}" readonly>
+    연락처: <input type="tel" name="tel" value="{{tel}}">
+    msg: <input type="text" name="content">
+    <input type="submit" value="전송">
+</form>
+</body>
+</html>
